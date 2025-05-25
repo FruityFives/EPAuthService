@@ -21,7 +21,7 @@ builder.Services.AddAuthentication("Bearer")
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Issuer"],
-            ValidAudience = builder.Configuration["Audience"],
+          //  ValidAudience = builder.Configuration["Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration["Secret"]))
         };

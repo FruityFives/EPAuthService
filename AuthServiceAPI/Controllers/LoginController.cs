@@ -41,16 +41,17 @@ namespace AuthServiceAPI.Controllers
             return Ok(new { token });
         }
 
-        [Authorize (Roles = "Admin")]
+        [Authorize]
         [HttpGet("validate")]
         public IActionResult ValidateToken()
         {
             var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
+            _logger.LogInformation("ValidateToken hit. Username: {Username}, Role: {Role}", username, role);
+
             if (string.IsNullOrEmpty(username))
             {
-                _logger.LogWarning("Token validation failed. No NameIdentifier claim.");
                 return Unauthorized("Token is missing or invalid.");
             }
 

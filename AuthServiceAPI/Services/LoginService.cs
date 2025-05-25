@@ -55,7 +55,7 @@ public class LoginService : ILoginService
 
         var token = new JwtSecurityToken(
             issuer: _config["Issuer"],
-            audience: _config["Audience"],
+            audience: _config["Audience"], // ← tilføj denne linje
             claims: claims,
             expires: DateTime.Now.AddMinutes(15),
             signingCredentials: credentials);
