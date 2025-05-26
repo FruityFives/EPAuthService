@@ -62,12 +62,14 @@ namespace AuthServiceAPI.Controllers
 
                     return Ok(new { message = "Token is valid", username, role });
                 }
-    
+
 
         [HttpGet("test")]
         public IActionResult Test()
         {
+
             _logger.LogInformation("ValidateToken endpoint hit.");
+            return Ok(new { message = "Test endpoint is working" });
             
         }
     }
