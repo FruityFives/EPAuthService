@@ -41,7 +41,7 @@ namespace AuthServiceAPI.Controllers
             return Ok(new { token });
         }
 
-        /*     [Authorize]
+               [Authorize]
                 [HttpGet("validate-token")]
                 public IActionResult ValidateToken()
                 {
@@ -62,10 +62,10 @@ namespace AuthServiceAPI.Controllers
 
                     return Ok(new { message = "Token is valid", username, role });
                 }
-        */
+    
 
-        [HttpGet("validate-token")]
-        public IActionResult ValidateToken()
+        [HttpGet("test")]
+        public IActionResult Test()
         {
             _logger.LogInformation("ValidateToken endpoint hit.");
             
