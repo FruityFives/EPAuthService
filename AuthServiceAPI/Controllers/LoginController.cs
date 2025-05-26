@@ -41,21 +41,34 @@ namespace AuthServiceAPI.Controllers
             return Ok(new { token });
         }
 
-        [Authorize]
-        [HttpGet("validate")]
+        /*     [Authorize]
+                [HttpGet("validate-token")]
+                public IActionResult ValidateToken()
+                {
+                    var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                    var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+                    _logger.LogInformation("ValidateToken hit. Username: {Username}, Role: {Role}", username, role);
+                    _logger.LogDebug("Claims: {@Claims}", User.Claims.Select(c => new { c.Type, c.Value }));
+                    // Check if username and role are present
+                    _logger.LogDebug("User claims count: {Count}", User.Claims.Count());
+                    _logger.LogDebug("User identity is authenticated: {IsAuthenticated}", User.Identity?.IsAuthenticated);
+
+                    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(role))
+                    {
+                        _logger.LogWarning("Token validation failed. Missing claims.");
+                        return Unauthorized("Invalid token.");
+                    }
+
+                    return Ok(new { message = "Token is valid", username, role });
+                }
+        */
+
+        [HttpGet("validate-token")]
         public IActionResult ValidateToken()
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var role = User.FindFirst(ClaimTypes.Role)?.Value;
-
-            _logger.LogInformation("ValidateToken hit. Username: {Username}, Role: {Role}", username, role);
-
-            if (string.IsNullOrEmpty(username))
-            {
-                return Unauthorized("Token is missing or invalid.");
-            }
-
-            return Ok(new { message = "Token is valid", username, role });
+            _logger.LogInformation("ValidateToken endpoint hit.");
+            
         }
     }
 }
