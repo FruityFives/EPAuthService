@@ -41,7 +41,7 @@ namespace AuthServiceAPI.Controllers
             return Ok(new { token });
         }
 
-               [Authorize]
+               [Authorize (Roles = "Admin")]
                 [HttpGet("validate-token")]
                 public IActionResult ValidateToken()
                 {
