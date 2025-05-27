@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
        <AssemblyVersion>1.0.1.1</AssemblyVersion>
     <FileVersion>1.0.1.1</FileVersion>
-    <InformationalVersion>2.0.0</InformationalVersion>
+    <InformationalVersion>3.0.0</InformationalVersion>
     
     <Description>
       Små ting

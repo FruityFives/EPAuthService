@@ -36,7 +36,7 @@ public class LoginService : ILoginService
     {
         var client = _clientFactory.CreateClient();
         var userServiceUrl = _config["UserServiceUrl"];
-        var validateUrl = $"{userServiceUrl}/users/validate";
+        var validateUrl = $"{userServiceUrl}/api/users/validate";
 
         var response = await client.PostAsJsonAsync(validateUrl, login);
         if (!response.IsSuccessStatusCode)
