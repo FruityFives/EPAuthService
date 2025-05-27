@@ -6,12 +6,19 @@ using Microsoft.IdentityModel.Tokens;
 using AuthServiceAPI.Models;
 using AuthServiceAPI.Services;
 
+/// <summary>
+/// Service til håndtering af login og token-generering.
+/// Kommunikerer med en ekstern UserService for at validere brugere.
+/// </summary>
 public class LoginService : ILoginService
 {
     private readonly IHttpClientFactory _clientFactory;
     private readonly IConfiguration _config;
     private readonly ILogger<LoginService> _logger;
 
+    /// <summary>
+    /// Constructor for LoginService. Injicerer HTTPClientFactory, konfiguration og logger.
+    /// </summary>
     public LoginService(IHttpClientFactory clientFactory, IConfiguration config, ILogger<LoginService> logger)
     {
         _clientFactory = clientFactory;
@@ -19,6 +26,12 @@ public class LoginService : ILoginService
         _logger = logger;
     }
 
+    /// <summary>
+    /// Autentificerer brugeren ved at sende loginoplysninger til UserService.
+    /// Returnerer et JWT-token hvis login er gyldigt.
+    /// </summary>
+    /// <param name="login">Login-model med brugernavn og adgangskode.</param>
+    /// <returns>JWT-token som string, eller null hvis login fejler.</returns>
     public async Task<string?> AuthenticateAsync(Login login)
     {
         var client = _clientFactory.CreateClient();
@@ -42,6 +55,13 @@ public class LoginService : ILoginService
         return GenerateJwtToken(user.Username, user.Role);
     }
 
+    /// <summary>
+    /// Genererer et JWT-token baseret på brugernavn og rolle.
+    /// Tokenet inkluderer claims og udløber efter 15 minutter.
+    /// </summary>
+    /// <param name="username">Brugerens navn.</param>
+    /// <param name="role">Brugerens rolle.</param>
+    /// <returns>JWT-token som string.</returns>
     private string GenerateJwtToken(string username, string role)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Secret"]));
@@ -55,7 +75,7 @@ public class LoginService : ILoginService
 
         var token = new JwtSecurityToken(
             issuer: _config["Issuer"],
-            audience: _config["Audience"], // ← tilføj denne linje
+            audience: _config["Audience"],
             claims: claims,
             expires: DateTime.Now.AddMinutes(15),
             signingCredentials: credentials);
