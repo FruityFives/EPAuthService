@@ -61,7 +61,6 @@ namespace AuthServiceAPI.Controllers
         /// 200 OK med brugeroplysninger hvis token er gyldigt.  
         /// 401 Unauthorized hvis token er ugyldigt eller mangler påkrævede claims.
         /// </returns>
-        [Authorize(Roles = "Admin")]
         [HttpGet("validate-token")]
         public IActionResult ValidateToken()
         {

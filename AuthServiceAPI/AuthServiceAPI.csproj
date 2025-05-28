@@ -6,10 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
        <AssemblyVersion>1.0.1.1</AssemblyVersion>
     <FileVersion>1.0.1.1</FileVersion>
-    <InformationalVersion>3.0.0</InformationalVersion>
+    <InformationalVersion>4.0.0</InformationalVersion>
     
     <Description>
-      Små ting
+      4.0.0 Fiksede authorize
+        3.0.0 Fiksede små ting og ændrede modeller controllers og services
       AuthService API for managing user accounts and authentication
     </Description>
   </PropertyGroup>
